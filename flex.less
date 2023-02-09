@@ -1,0 +1,156 @@
+/**
+* flex布局封装
+*
+* 类名命名规则：
+*
+*     my-f-{主轴方向}-{justify-content}-{align-items}
+*
+*     主轴方向： row横向、col纵向、rr横向反转主轴、cr纵向反转主轴
+*
+*     justify-content、align-items规则：
+*         start:flex-start
+*         end:flex-end
+*         center:center
+*         between:space-between
+*         around:space-around
+*         evenly:space-evenly
+*
+*     特定类名：
+*         my-f：开启flex布局，不进行其他设置
+*         my-f-w：允许换行，flex-wrap缩写
+*         my-f-d-z:禁止缩放，flex-disabled-zoom flex:0 0 auto;缩写
+*         my-f-z:允许缩放，flex-zoom flex:1 1 auto;缩写
+*/
+
+
+.flex-align-items-mixins(@flexDirection, @justifyContent) {
+
+  &-start {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: @justifyContent;
+    align-items: flex-start;
+  }
+
+  &-center {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: @justifyContent;
+    align-items: center;
+  }
+
+  &-end {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: @justifyContent;
+    align-items: flex-end;
+  }
+
+  &-baseline {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: @justifyContent;
+    align-items: flex-baseline;
+  }
+
+  &-stretch {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: @justifyContent;
+    align-items: flex-stretch;
+  }
+}
+
+.flex-mixins(@flexDirection) {
+  display: flex;
+  flex-direction: @flexDirection;
+
+  &-start {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: flex-start;
+    .flex-align-items-mixins(@flexDirection, flex-start)
+  }
+
+  &-center {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: center;
+    .flex-align-items-mixins(@flexDirection, center)
+  }
+
+  &-end {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: flex-end;
+    .flex-align-items-mixins(@flexDirection, flex-end)
+  }
+
+  &-between {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: space-between;
+    .flex-align-items-mixins(@flexDirection, space-between)
+  }
+
+  &-around {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: space-around;
+    .flex-align-items-mixins(@flexDirection, space-around)
+  }
+
+  &-evenly {
+    display: flex;
+    flex-direction: @flexDirection;
+    justify-content: space-evenly;
+    .flex-align-items-mixins(@flexDirection, space-evenly)
+  }
+}
+
+.my-f {
+  display: flex;
+
+  &-d-z {
+    display: flex;
+    // 禁止缩放
+    flex: 0 0 auto;
+  }
+
+  &-z {
+    display: flex;
+    // 禁止缩放
+    flex: 1 1 auto;
+  }
+
+  &-w {
+    display: flex;
+    // 允许换行
+    flex-wrap: wrap;
+  }
+
+  &-row {
+    display: flex;
+    // 横向主轴
+    .flex-mixins(row)
+  }
+
+  &-col {
+    display: flex;
+    // 纵向主轴
+    .flex-mixins(column)
+  }
+
+  &-rr {
+    display: flex;
+    // 横向反转主轴
+    .flex-mixins(row-reverse)
+  }
+
+  &-cr {
+    display: flex;
+    // 纵向反转主轴
+    .flex-mixins(column-reverse)
+  }
+
+}

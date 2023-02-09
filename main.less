@@ -1,0 +1,128 @@
+// h5
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 移动端点击高亮(这个属性只用于iOS (iPhone和iPad))
+}
+
+/* App.vue */
+// onMounted(() => {
+//   // 固定body高度为获取的视口高度
+//   document.documentElement.style.setProperty('--window-inner-height', `${window.innerHeight}px`);
+//   window.addEventListener('resize', () => {
+//     document.documentElement.style.setProperty(
+//       '--window-inner-height',
+//       `${window.innerHeight}px`,
+//     );
+//   });
+// });
+
+#app {
+  height: calc(var(--window-inner-height));
+  overflow: hidden;
+  /* 字体 */
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  /* webkit-font-smoothing, 文字抗锯齿: none，无抗锯齿 subpixel-antialiased，默认值，效果一般 antialiased，抗锯齿，字体清晰*/
+  -webkit-font-smoothing: antialiased;
+  /* -moz-osx-font-smoothing，是火狐针对ios系统制定的规则，有两个值，inherit，grayscale（字体抗锯齿，比较清晰）。 */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input{
+  border: none;
+  outline: none;
+  /* 去除系统默认appearance的样式,常用于IOS下移除原生样式 */
+  -webkit-appearance: none; 
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+textarea{
+  border: none;
+  outline: none;
+}
+
+button{
+  border: none;
+  outline: none;
+}
+
+a{
+  text-decoration: none;
+  color: #333;
+}
+
+li{
+  list-style-type: none;
+}
+
+//解决端遮罩层穿透
+body.dialog-open {
+  position: fixed;
+  width: 100%;
+}
+
+.page{
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.router-view{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: 0 auto;
+  /* -webkit-overflow-scrolling属性是来控制元素在移动设备上是否有回弹的效果 */
+  /* verflow:auto;winphone8和android4+ */
+  -webkit-overflow-scrolling: touch; /* ios5+ */
+
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active{
+    height: 100%;
+    will-change: transform;
+    transition: all 500ms;
+    position: absolute;
+    backface-visibility: hidden;
+}
+.slide-right-enter{
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+}
+.slide-right-leave-active{
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+}
+.slide-left-enter{
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+}
+.slide-left-leave-active{
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+}
+
+.van-badge--fixed {
+  z-index: 1000;
+}
+
+/* a, .green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+} */
+
